@@ -7,8 +7,8 @@ fi
 SCRIPTDIR="$( cd "$(dirname $0)" && pwd )"
 
 apt-get update
-sys="debian"
-codename="stretch"
+sys="ubuntu"
+codename="bionic"
 system="${sys}_${codename}"
 arch=$(dpkg --print-architecture)
 
@@ -37,6 +37,7 @@ download homegear-nodes-core_current_${system}_${arch}.deb
 download homegear-nodes-extra_current_${system}_${arch}.deb || exit 1
 download homegear-licensing_current_${system}_${arch}.deb || exit 1
 download homegear-easy-licensing_current_${system}_${arch}.deb || exit 1
+download python3-homegear_current_${system}_${arch}.deb
 
 # Download modules
 download homegear-homematicbidcos_current_${system}_${arch}.deb
@@ -90,6 +91,12 @@ if [ $? -ne 0 ]; then
 		apt-get -y -f install || exit 1
 		dpkg -i homegear_current_${system}_${arch}.deb || exit 1
 	fi
+fi
+
+dpkg -i python3-homegear_current_${system}_${arch}.deb
+if [ $? -ne 0 ]; then
+	apt-get -y -f install || exit 1
+	dpkg -i python3-homegear_current_${system}_${arch}.deb || exit 1
 fi
 
 dpkg -i homegear-nodes-core_current_${system}_${arch}.deb

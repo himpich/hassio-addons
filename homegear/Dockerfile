@@ -15,7 +15,8 @@ RUN \
     libzip4 \
     libavahi-client3 \
     libavahi-client-dev \
-    insserv
+    libgnutlsxx28 \
+    python3
 #RUN \
 #    touch /tmp/HOMEGEAR_STATIC_INSTALLATION; \
 #    wget https://apt.homegear.eu/Release.key && apt-key add Release.key && rm Release.key; \
