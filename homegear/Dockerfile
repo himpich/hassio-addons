@@ -67,6 +67,6 @@ RUN \
 
 COPY script/run.sh /run.sh
 RUN chmod +x /run.sh
-ENTRYPOINT ["/bin/bash", "-c", "/run.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "/run.sh"]
 
 EXPOSE 2001 2002 2003
