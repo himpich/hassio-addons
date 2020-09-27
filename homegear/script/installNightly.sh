@@ -8,7 +8,7 @@ SCRIPTDIR="$( cd "$(dirname $0)" && pwd )"
 
 apt-get update
 sys="ubuntu"
-codename="bionic"
+codename="focal"
 system="${sys}_${codename}"
 arch=$(dpkg --print-architecture)
 
@@ -28,6 +28,8 @@ TEMPDIR=$(mktemp -d)
 cd $TEMPDIR
 rm -f homegear*.deb
 rm -f libhomegear*.deb
+
+apt-get -f install libicu66 libonig5 libreadline8
 
 download libhomegear-base_current_${system}_${arch}.deb
 download libhomegear-node_current_${system}_${arch}.deb
@@ -124,7 +126,7 @@ if [ $? -ne 0 ]; then
 fi
 
 installModule homegear-homematicbidcos_current_${system}_${arch}.deb
-installModule homegear-homematicwired_current_${system}_${arch}.deb
+#installModule homegear-homematicwired_current_${system}_${arch}.deb
 installModule homegear-insteon_current_${system}_${arch}.deb
 installModule homegear-max_current_${system}_${arch}.deb
 installModule homegear-philipshue_current_${system}_${arch}.deb
@@ -132,7 +134,7 @@ installModule homegear-sonos_current_${system}_${arch}.deb
 installModule homegear-kodi_current_${system}_${arch}.deb
 installModule homegear-ipcam_current_${system}_${arch}.deb
 installModule homegear-beckhoff_current_${system}_${arch}.deb
-installModule homegear-knx_current_${system}_${arch}.deb
+#installModule homegear-knx_current_${system}_${arch}.deb
 installModule homegear-enocean_current_${system}_${arch}.deb
 installModule homegear-intertechno_current_${system}_${arch}.deb
 installModule homegear-rs2w_current_${system}_${arch}.deb

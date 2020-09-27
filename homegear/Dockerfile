@@ -3,20 +3,26 @@ ARG BUILD_FROM
 ARG BUILD_ARCH
 
 FROM $BUILD_FROM
-MAINTAINER Kreativmonkey <kreativmonkey@calyrium.org>
+MAINTAINER Himpich <github@godmin.de>
+
+SHELL ["/usr/bin/bash", "-o", "pipefail", "-c"]
 
 
 RUN \
+    ln -s /usr/bin/bash /bin/bash && ln -s /usr/bin/bash /bin/sh && \
     apt-get update && apt-get -y install \
     apt-transport-https \
     wget ca-certificates \
     apt-utils \
     gnupg \
-    libzip4 \
+    libzip5 \
     libavahi-client3 \
     libavahi-client-dev \
     libgnutlsxx28 \
-    python3
+    python3 \
+    libcurl3-gnutls libenchant1c2a libicu66 libonig5 libreadline8 unzip \
+    p7zip-full libxslt1.1 libedit2 libqdbm14 libltdl7 python3-lzo
+
 #RUN \
 #    touch /tmp/HOMEGEAR_STATIC_INSTALLATION; \
 #    wget https://apt.homegear.eu/Release.key && apt-key add Release.key && rm Release.key; \
@@ -55,7 +61,7 @@ COPY script/installNightly.sh /installNightly.sh
 RUN \
     touch /tmp/HOMEGEAR_STATIC_INSTALLATION; \
     wget https://homegear.eu/packages/Release.key && apt-key add Release.key && rm Release.key; \
-    echo 'deb https://homegear.eu/packages/Debian/ stretch/' >> /etc/apt/sources.list.d/homegear.list; \
+    echo 'deb https://homegear.eu/packages/Ubuntu/ focal/' >> /etc/apt/sources.list.d/homegear.list; \
     chmod +x /installNightly.sh; \
     /installNightly.sh; \
     rm -f /etc/homegear/dh1024.pem; \
@@ -67,6 +73,6 @@ RUN \
 
 COPY script/run.sh /run.sh
 RUN chmod +x /run.sh
-ENTRYPOINT ["/bin/sh", "-c", "/run.sh"]
+ENTRYPOINT ["/usr/bin/bash", "-c", "/run.sh"]
 
 EXPOSE 2001 2002 2003
